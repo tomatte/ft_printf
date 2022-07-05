@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:27:51 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/01 23:50:38 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/05 04:22:16 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+# define HEXMAP "0123456789abcdef"
 
 typedef struct s_list
 {
@@ -97,5 +98,11 @@ void	ft_putnbr(int n);
 
 //same as ft_putnbr, but with unsigned integers
 void	ft_put_uint(unsigned int n);
+
+//converts decimal to hexadecimal
+char	*ft_itohex(long unsigned int number);
+
+//convert string to uppercase
+char	*ft_strtoupper(char *str);
 
 #endif
