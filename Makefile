@@ -2,7 +2,7 @@ SRC_PATH	=		./src/
 
 H_SRC		=		./includes/ft_printf.h ./includes/libft.h
 
-SRC			=		./src/ft_printf.c ./src/ft_uitoa.c
+SRC			=		./src/ft_printf.c ./src/ft_uitoa.c ./src/ft_printf_utils.c
 
 OBJ			=		$(SRC:.c=.o)
 

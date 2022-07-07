@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/07 19:59:25 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/07/05 21:10:04 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/05 21:23:49 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../includes/libft.h"
 
-# include <stdarg.h>
-# include <stddef.h>
+void	ft_printchar(int c, int *count)
+{
+	ft_putchar((char) c);
+	*count += 1;
+}
 
-char	*ft_uitoa(unsigned int n);
-int		ft_printf(const char *str, ...);
-void	ft_printchar(int c, int *count);
-void	ft_printstr(char *str, int *count);
-
-#endif
+void	ft_printstr(char *str, int *count)
+{
+	*count += ft_strlen(str);
+	ft_putstr(str);
+	free(str);
+}

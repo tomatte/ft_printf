@@ -6,34 +6,14 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 20:27:23 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/05 20:36:31 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:57:00 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/ft_printf.h"
 
-void	ft_printstr(char *str, int *count)
-{
-	if (str == NULL)
-	{
-		ft_putstr("(NULL)");
-		*count += ft_strlen("(NULL)");
-		free(str);
-		return ;
-	}
-	*count += ft_strlen(str);
-	ft_putstr(str);
-	free(str);
-}
-
-void	ft_printchar(int c, int *count)
-{
-	ft_putchar((char) c);
-	*count += 1;
-}
-
-void	ft_pointerstr(va_list ap, int *ct)
+static void	ft_pointerstr(va_list ap, int *ct)
 {
 	char				*str;
 	long unsigned int	address;
@@ -49,6 +29,21 @@ void	ft_pointerstr(va_list ap, int *ct)
 	free(str);
 }
 
+static void	ft_showstr(char *str, int *count)
+{
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		*count += ft_strlen("(null)");
+		return ;
+	}
+	else
+	{
+		ft_putstr(str);
+		*count += ft_strlen(str);
+	}
+}
+
 static void	format_specifier(const char **str, va_list ap, int *ct)
 {
 	(*str)++;
@@ -57,7 +52,7 @@ static void	format_specifier(const char **str, va_list ap, int *ct)
 	else if (**str == 'c')
 		ft_printchar(va_arg(ap, int), ct);
 	else if (**str == 's')
-		ft_printstr(ft_strdup(va_arg(ap, char *)), ct);
+		ft_showstr(va_arg(ap, char *), ct);
 	else if (**str == 'd' || **str == 'i')
 		ft_printstr(ft_itoa(va_arg(ap, int)), ct);
 	else if (**str == 'u')
