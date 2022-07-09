@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/08 22:26:05 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/09 18:35:50 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,62 @@ void	init_sign(t_sign **sign)
 	(*sign)->is_valid = 1;
 }
 
-void	sign_place(const char *str, t_sign **sign, int c)
+void	is_digit_alone(const char *str, t_sign **sign, int *index)
 {
+	int	i;
+	int	n;
+
+	if (!ft_isdigit(*str))
+		return ;
+	n = 0;
+	i = -1;
+	while (ft_isdigit(str[++i]))
+		n = (n * 10) + str[i] - 48;
+	if (str[i] != '.' && !ft_strchr(CONVERSION, str[i]))
+		(*sign)->is_valid = 0;
+	else
+		(*sign)->fill = n;
+	(*index) += i;
+}
+
+void	dot_or_zero(const char *str, t_sign **sign, int c, int *index)
+{
+	int	i;
+	int	n;
+
+	if (c != '.' && c != '0')
+		return ;
+	str++;
+	if ((!ft_isdigit(*str) && !ft_strchr("diuxX", *str)) || !*str)
+	{
+		(*sign)->is_valid = 0;
+		return ;
+	}
+	if (ft_strchr("diuxX", *str))
+	{
+		(*sign)->type = *str;
+		return ;
+	}
+	n = 0;
+	i = -1;
+	while (ft_isdigit(str[++i]))
+		n = (n * 10) + str[i] - 48;
+	if (!ft_strchr("diuxX", str[i]) || !*str)
+	{
+		(*sign)->is_valid = 0;
+		return ;
+	}
+	(*sign)->type = str[i];
+	if (c == '.')
+		(*sign)->dot = n;
+	else if (c == '0')
+		(*sign)->zero = n;
+}
+
+void	sign_place(t_sign **sign, int c)
+{
+	if (((*sign)->dot || (*sign)->zero) && (*sign)->is_valid)
+		return ;
 	if (ft_strchr(CONVERSION, c))
 	{
 		(*sign)->type = c;
@@ -37,10 +91,6 @@ void	sign_place(const char *str, t_sign **sign, int c)
 		(*sign)->is_valid = 0;
 	else if (c == '-')
 		(*sign)->minus = 1;
-	else if (c == '0')
-		(*sign)->zero = 1;
-	else if (c == '.')
-		(*sign)->dot = 1;
 	else if (c == '#')
 		(*sign)->ht = 1;
 	else if (c == ' ')

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/08 22:24:11 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/09 18:28:58 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	just_str(const char **str, t_list **sm)
 	*str = &(*str)[i];
 }
 
-void	number_specifier(const char *str)
-{
-	
-}
-
 void	verify_specifiers(const char **str, t_sign **sign, t_list **sm)
 {
 	int	c;
@@ -46,7 +41,9 @@ void	verify_specifiers(const char **str, t_sign **sign, t_list **sm)
 	while ((*str)[i])
 	{
 		c = (*str)[i + 1];
-		sign_place(*str, sign, c);
+		is_digit_alone(&(*str)[i + 1], sign, &i);
+		dot_or_zero(&(*str)[i + 1], sign, c, &i);
+		sign_place(sign, c);
 		if (!(*sign)->is_valid || (*sign)->type || !c)
 			break ;
 		i++;
@@ -106,14 +103,7 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	ft_printf("a%da\n", 20);
-	ft_printf("a% da\n", 20);
-	ft_printf("a%+da\n", 20);
-	ft_printf("a% da\n", -20);
-	ft_printf("a% +da\n", 20);
-	ft_printf("a%+ da\n", 20);
-	ft_printf("a% +da\n", -20);
-	ft_printf("a%+da\n", -20);
+	ft_printf("a%.10da\n", -20);
 	return (0);
 }
 /* 

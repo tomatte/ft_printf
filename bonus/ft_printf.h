@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/08 22:25:51 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:38:21 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stddef.h>
 # include "libft.h"
 
-//#include <stdio.h>
+#include <stdio.h>
 
 # define CONVERSION "cspdiuxX%"
 # define FORMAT "-0.# +"
@@ -40,7 +40,9 @@ int		ft_printf(const char *str, ...);
 void	ft_printchar(int c, int *count);
 void	ft_printstr(char *str, int *count);
 void	init_sign(t_sign **sign);
-void	sign_place(const char *str, t_sign **sign, int c);
+void	sign_place(t_sign **sign, int c);
 void	ft_convert(t_list **sm, t_sign **sign, va_list ap);
+void	dot_or_zero(const char *str, t_sign **sign, int c, int *index);
+void	is_digit_alone(const char *str, t_sign **sign, int *index);
 
 #endif
