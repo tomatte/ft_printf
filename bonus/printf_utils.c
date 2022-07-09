@@ -44,24 +44,18 @@ void	is_digit_alone(const char *str, t_sign **sign, int *index)
 	(*index) += i;
 }
 
-void	dot_or_zero(const char *str, t_sign **sign, int c, int *index)
+void	dot_case(const char *str, t_sign **sign, int c, int *index)
 {
 	int	i;
 	int	n;
 
-	if (c != '.' && c != '0')
+	if (c != '.')
 		return ;
 	str++;
 	if ((!ft_isdigit(*str) && !ft_strchr("diuxX", *str)) || !*str)
-	{
 		(*sign)->is_valid = 0;
-		return ;
-	}
 	if (ft_strchr("diuxX", *str))
-	{
 		(*sign)->type = *str;
-		return ;
-	}
 	n = 0;
 	i = -1;
 	while (ft_isdigit(str[++i]))
@@ -71,11 +65,9 @@ void	dot_or_zero(const char *str, t_sign **sign, int c, int *index)
 		(*sign)->is_valid = 0;
 		return ;
 	}
+	*index += i + 1;
 	(*sign)->type = str[i];
-	if (c == '.')
-		(*sign)->dot = n;
-	else if (c == '0')
-		(*sign)->zero = n;
+	(*sign)->dot = n;
 }
 
 void	sign_place(t_sign **sign, int c)

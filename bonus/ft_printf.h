@@ -42,7 +42,7 @@ void	ft_printstr(char *str, int *count);
 void	init_sign(t_sign **sign);
 void	sign_place(t_sign **sign, int c);
 void	ft_convert(t_list **sm, t_sign **sign, va_list ap);
-void	dot_or_zero(const char *str, t_sign **sign, int c, int *index);
+void	dot_case(const char *str, t_sign **sign, int c, int *index);
 void	is_digit_alone(const char *str, t_sign **sign, int *index);
 
 #endif

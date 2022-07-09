@@ -42,7 +42,7 @@ void	verify_specifiers(const char **str, t_sign **sign, t_list **sm)
 	{
 		c = (*str)[i + 1];
 		is_digit_alone(&(*str)[i + 1], sign, &i);
-		dot_or_zero(&(*str)[i + 1], sign, c, &i);
+		dot_case(&(*str)[i + 1], sign, c, &i);
 		sign_place(sign, c);
 		if (!(*sign)->is_valid || (*sign)->type || !c)
 			break ;
@@ -98,14 +98,15 @@ int	ft_printf(const char *str, ...)
 	string_mount(&str, &s_mount, ap, &sign);
 	len = print_str(&s_mount);
 	ft_lstclear(&s_mount, free);
+	va_end(ap);
 	return (len);
 }
 
-int	main(void)
+/* int	main(void)
 {
-	ft_printf("a%.10da\n", -20);
+	ft_printf("%s")
 	return (0);
-}
+} */
 /* 
 	haverá uma lista encadeada com todas as strings para printar
 
