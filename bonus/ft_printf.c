@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/09 18:28:58 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:25:18 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,34 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-/* int	main(void)
+int	main(void)
 {
-	ft_printf("%s")
+	int	a = 5;
+
+	ft_printf("-------- TEST 1 ---------\n");
+	ft_printf("|%d|\n", 9);
+	ft_printf("|%.3d|\n", 9);
+	ft_printf("|% d|\n", 9);
+	
+	ft_printf("\n-------- TEST 2 ---------\n");
+	ft_printf("|%.3x|\n", 15);
+	printf("|%.3x|\n", 15);
+
+	ft_printf("\n-------- TEST 3 ---------\n");
+	ft_printf("|% p|\n", &a);
+	printf("|% p|\n", &a);
 	return (0);
-} */
+}
 /* 
+	------------
+	fazer o (number) width e o (minus) por ultimo
+	depois q todas as conversões ja foram feitas
+	pois eles independem do numero convertido
+
+
+
+
+
 	haverá uma lista encadeada com todas as strings para printar
 
 	just_str():

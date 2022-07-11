@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/09 18:35:50 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:41:30 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,29 @@ void	sign_place(t_sign **sign, int c)
 		(*sign)->spc = 1;
 	else if (c == '+')
 		(*sign)->plus = 1;
+}
+
+char	*set_n0(char **str, t_sign **sign)
+{
+	char	*aux;
+	int		i;
+	char	*n0;
+
+	i = (*sign)->dot - ft_strlen(*str);
+	if (**str == '-')
+		i--;
+	n0 = (char *) malloc(i + 1);
+	if (!n0)
+		return (NULL);
+	if (**str == '-')
+		aux = ft_strdup((*str) + 1);
+	else
+		aux = ft_strdup((*str));
+	if (!aux)
+		return (NULL);
+	free(*str);
+	*str = aux;
+	ft_memset((void *) n0, '0', i);
+	n0[i] = '\0';
+	return (n0);
 }

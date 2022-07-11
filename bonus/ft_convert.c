@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 05:15:03 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/09 18:52:45 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:29:36 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,47 +27,27 @@ static int	num_len(int n)
 	return (i);
 }
 
-char	*set_n0(char **str, t_sign **sign, int num)
-{
-	char	*aux;
-	int		i;
-	char	*n0;
-
-	i = (*sign)->dot - num_len(num);
-	if (!ft_isdigit(**str))
-		i++;
-	n0 = (char *) malloc(i + 1);
-	if (!n0)
-		return (NULL);
-	*n0 = **str;
-	if (!ft_isdigit(**str))
-		aux = ft_strdup((*str) + 1);
-	else
-		aux = ft_strdup((*str));
-	if (!aux)
-		return (NULL);
-	free(*str);
-	*str = aux;
-	if (*n0 == '-' || *n0 == '+')
-		ft_memset((void *) (n0 + 1), '0', i - 1);
-	else
-		ft_memset((void *) n0, '0', i);
-	n0[i] = '\0';
-	return (n0);
-}
-
 static void	precision(char **str, t_sign **sign, int num)
 {
 	int		i;
 	char	*n0;
 	char	*aux;
 
-
-	n0 = set_n0(str, sign, num);
+	if (!(*sign)->dot)
+		return ;
+	n0 = set_n0(str, sign);
+	if (!n0)
+		return ;
 	aux = ft_strjoin(n0, *str);
 	if (!aux)
 		return ;
 	free(n0);
+	if (num < 0)
+	{
+		n0 = aux;
+		aux = ft_strjoin("-", aux);
+		free(n0);
+	}
 	if (*str)
 		free(*str);
 	*str = aux;
@@ -120,8 +100,12 @@ void	ft_convert(t_list **sm, t_sign **sign, va_list ap)
 		return (init_sign(sign));
 	if ((*sign)->type == 'd' || (*sign)->type == 'i')
 		str = print_int(sign, ap);
-	if ((*sign)->type == 'c')
+	else if ((*sign)->type == 'c')
 		str = print_char(va_arg(ap, int));
+	else if ((*sign)->type == 'x' || (*sign)->type == 'X')
+		str = print_hex(sign, ap, (*sign)->type);
+	else if ((*sign)->type == 'p')
+		str = print_pointer(sign, ap);
 	init_sign(sign);
 	if (!str)
 		return ;
