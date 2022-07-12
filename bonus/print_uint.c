@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*   print_uint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 07:04:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 19:03:43 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/07/11 18:57:10 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/11 19:07:14 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	num_len(unsigned int n)
+static int	num_len(int n)
 {
 	int	i;
 
@@ -27,20 +27,35 @@ static int	num_len(unsigned int n)
 	return (i);
 }
 
-char	*ft_uitoa(unsigned int n)
+static void	precision(char **str, t_sign **sign, unsigned int num)
 {
-	char	*s_num;
-	int		len;
+	int		i;
+	char	*n0;
+	char	*aux;
 
-	len = num_len(n);
-	s_num = (char *) malloc(sizeof(char) * len + 1);
-	if (!s_num)
+	if (!(*sign)->dot)
+		return ;
+	n0 = set_n0(str, sign);
+	if (!n0)
+		return ;
+	aux = ft_strjoin(n0, *str);
+	if (!aux)
+		return ;
+	free(n0);
+	if (*str)
+		free(*str);
+	*str = aux;
+}
+
+char	*print_uint(t_sign **sign, va_list ap)
+{
+	char			*str;
+	unsigned int	num;
+
+	num = va_arg(ap, unsigned int);
+	str = ft_uitoa(num);
+	if (!str)
 		return (NULL);
-	s_num[len] = '\0';
-	while (--len >= 0)
-	{
-		s_num[len] = (n % 10) + 48;
-		n /= 10;
-	}
-	return (s_num);
+	precision(&str, sign, num);
+	return (str);
 }

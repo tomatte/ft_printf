@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 18:25:18 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:18:02 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	verify_specifiers(const char **str, t_sign **sign, t_list **sm)
 	while ((*str)[i])
 	{
 		c = (*str)[i + 1];
-		is_digit_alone(&(*str)[i + 1], sign, &i);
+		is_digit_alone(&(*str)[i + 1], sign, &i, &c);
 		dot_case(&(*str)[i + 1], sign, c, &i);
 		sign_place(sign, c);
 		if (!(*sign)->is_valid || (*sign)->type || !c)
@@ -99,13 +99,14 @@ int	ft_printf(const char *str, ...)
 	len = print_str(&s_mount);
 	ft_lstclear(&s_mount, free);
 	va_end(ap);
+	free(sign);
 	return (len);
 }
 
 int	main(void)
 {
 	int	a = 5;
-
+/* 
 	ft_printf("-------- TEST 1 ---------\n");
 	ft_printf("|%d|\n", 9);
 	ft_printf("|%.3d|\n", 9);
@@ -118,6 +119,18 @@ int	main(void)
 	ft_printf("\n-------- TEST 3 ---------\n");
 	ft_printf("|% p|\n", &a);
 	printf("|% p|\n", &a);
+
+	ft_printf("\n-------- TEST 4 ---------\n");
+	ft_printf("|%+u|\n", 999);
+	printf("|%+u|\n", 999);
+
+	ft_printf("\n-------- TEST 5 ---------\n");
+	ft_printf("|%5d|\n", 999);
+	printf("|%5d|\n", 999);
+	printf("|%5d|\n", 999); */
+
+	ft_printf("|%-09.7d|\n", 99);
+	printf("|%-09.7d|\n", 99);
 	return (0);
 }
 /* 

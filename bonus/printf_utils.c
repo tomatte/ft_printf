@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 16:41:30 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:14:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_sign(t_sign **sign)
 	(*sign)->is_valid = 1;
 }
 
-void	is_digit_alone(const char *str, t_sign **sign, int *index)
+void	is_digit_alone(const char *str, t_sign **sign, int *index, int *c)
 {
 	int	i;
 	int	n;
@@ -39,9 +39,14 @@ void	is_digit_alone(const char *str, t_sign **sign, int *index)
 		n = (n * 10) + str[i] - 48;
 	if (str[i] != '.' && !ft_strchr(CONVERSION, str[i]))
 		(*sign)->is_valid = 0;
+	else if (*str == '0')
+		(*sign)->zero = n;
 	else
 		(*sign)->fill = n;
 	(*index) += i;
+	*c = str[i];
+	if (ft_strchr(CONVERSION, str[i]) && str[i])
+		(*sign)->type = str[i];
 }
 
 void	dot_case(const char *str, t_sign **sign, int c, int *index)
