@@ -6,30 +6,14 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:45:45 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 18:56:34 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:48:40 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	num_len(int n)
-{
-	int	i;
-
-	i = 0;
-	if (!n)
-		return (1);
-	while (n)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
 static void	precision(char **str, t_sign **sign, int num)
 {
-	int		i;
 	char	*n0;
 	char	*aux;
 
@@ -57,6 +41,7 @@ static void	plus_or_space(char **str, int num, t_sign **sign)
 {
 	char	*aux;
 
+	aux = NULL;
 	if (num >= 0 && ((*sign)->plus || (*sign)->spc))
 	{
 		if ((*sign)->plus)
@@ -74,7 +59,6 @@ char	*print_int(t_sign **sign, va_list ap)
 {
 	char	*str;
 	int		num;
-	int		i;
 
 	num = va_arg(ap, int);
 	str = ft_itoa(num);

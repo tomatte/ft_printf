@@ -6,11 +6,10 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 15:14:19 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:48:31 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
 void	init_sign(t_sign **sign)

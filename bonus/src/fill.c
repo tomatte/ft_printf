@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 04:46:15 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 05:56:26 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:44:17 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ static void	fill_zeros(char **str, t_sign **sign)
 
 void	fill(char **str, t_sign **sign)
 {
-	int		x;
-	char	*padd;
-	char	c;
-
 	if ((!(*sign)->fill && !(*sign)->zero) || !*str)
 		return ;
 	is_minus(sign);

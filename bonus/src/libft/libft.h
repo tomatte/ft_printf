@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:27:51 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/05 02:35:55 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:28:41 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ char	*ft_itohex(long unsigned int number);
 
 //convert string to uppercase
 char	*ft_strtoupper(char *str);
+
+//convert unsigned int to string
+char	*ft_uitoa(unsigned int n);
 
 #endif

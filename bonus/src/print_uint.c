@@ -6,30 +6,14 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:57:10 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 19:07:14 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:48:57 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	num_len(int n)
+static void	precision(char **str, t_sign **sign)
 {
-	int	i;
-
-	i = 0;
-	if (!n)
-		return (1);
-	while (n)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
-static void	precision(char **str, t_sign **sign, unsigned int num)
-{
-	int		i;
 	char	*n0;
 	char	*aux;
 
@@ -56,6 +40,6 @@ char	*print_uint(t_sign **sign, va_list ap)
 	str = ft_uitoa(num);
 	if (!str)
 		return (NULL);
-	precision(&str, sign, num);
+	precision(&str, sign);
 	return (str);
 }

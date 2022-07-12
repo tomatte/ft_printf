@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 15:18:02 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:58:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,58 +102,3 @@ int	ft_printf(const char *str, ...)
 	free(sign);
 	return (len);
 }
-
-int	main(void)
-{
-	int	a = 5;
-/* 
-	ft_printf("-------- TEST 1 ---------\n");
-	ft_printf("|%d|\n", 9);
-	ft_printf("|%.3d|\n", 9);
-	ft_printf("|% d|\n", 9);
-	
-	ft_printf("\n-------- TEST 2 ---------\n");
-	ft_printf("|%.3x|\n", 15);
-	printf("|%.3x|\n", 15);
-
-	ft_printf("\n-------- TEST 3 ---------\n");
-	ft_printf("|% p|\n", &a);
-	printf("|% p|\n", &a);
-
-	ft_printf("\n-------- TEST 4 ---------\n");
-	ft_printf("|%+u|\n", 999);
-	printf("|%+u|\n", 999);
-
-	ft_printf("\n-------- TEST 5 ---------\n");
-	ft_printf("|%5d|\n", 999);
-	printf("|%5d|\n", 999);
-	printf("|%5d|\n", 999); */
-
-	ft_printf("|%-09.7d|\n", 99);
-	printf("|%-09.7d|\n", 99);
-	return (0);
-}
-/* 
-	------------
-	fazer o (number) width e o (minus) por ultimo
-	depois q todas as conversões ja foram feitas
-	pois eles independem do numero convertido
-
-
-
-
-
-	haverá uma lista encadeada com todas as strings para printar
-
-	just_str():
-		se for string normal, ela será adicionada na lista encadeada
-		o ponteiro irá avançar até um % ou nulo
-	verify specifiers()
-		irá analisar todas as flags após o % e atribuir ao s_sign
-		
-		caso for invalido, então irá adicionar o % à lista para ser printado
-		avançará o ponteiro e reinicializará o s_sign
-		
-	
-	//
- */
