@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 20:58:39 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:55:53 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,33 @@ void	verify_specifiers(const char **str, t_sign **sign, t_list **sm)
 		(*str) = &(*str)[i + 2];
 }
 
-void	string_mount(const char **str, t_list **sm, va_list ap, t_sign **sign)
+static int	string_mount(const char **str, t_list **sm, va_list ap, t_sign **sign)
 {
+	int	c_n;
+
+	c_n = 0;
 	while (**str)
 	{
 		just_str(str, sm);
 		verify_specifiers(str, sign, sm);
-		ft_convert(sm, sign, ap);
+		ft_convert(sm, sign, ap, &c_n);
 	}
+	return (c_n);
 }
 
 int	print_str(t_list **sm)
 {
-	int	count;
+	int		count;
 
 	count = 0;
 	while (*sm)
 	{
-		ft_putstr((char *) (*sm)->content);
+		if (!*((char *)(*sm)->content))
+			write(1, "\0", 1);
+		else
+			ft_putstr((char *) (*sm)->content);
 		count += ft_strlen((char *) (*sm)->content);
-		sm = &(*sm)->next;
+		sm = &(*sm)->next; 
 	}
 	return (count);
 }
@@ -95,8 +102,8 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	init_sign(&sign);
 	va_start(ap, str);
-	string_mount(&str, &s_mount, ap, &sign);
-	len = print_str(&s_mount);
+	len = string_mount(&str, &s_mount, ap, &sign);
+	len += print_str(&s_mount);
 	ft_lstclear(&s_mount, free);
 	va_end(ap);
 	free(sign);

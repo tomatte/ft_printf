@@ -36,6 +36,8 @@ move:
 $(NAME):	compile_src ${LIBFT} move
 	ar -rcs $@ $(OBJ)
 
+bonus: all
+
 clean:
 	rm -f ${OBJ}; \
 	$(MAKE) -C ./src/libft clean

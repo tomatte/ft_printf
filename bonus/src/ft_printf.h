@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 17:46:29 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:56:42 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_printchar(int c, int *count);
 void	ft_printstr(char *str, int *count);
 void	init_sign(t_sign **sign);
 void	sign_place(t_sign **sign, int c);
-void	ft_convert(t_list **sm, t_sign **sign, va_list ap);
+void	ft_convert(t_list **sm, t_sign **sign, va_list ap, int *c_n);
 void	dot_case(const char *str, t_sign **sign, int c, int *index);
 void	is_digit_alone(const char *str, t_sign **sign, int *index, int *c);
 char	*set_n0(char **str, t_sign **sign);
