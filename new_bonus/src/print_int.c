@@ -6,27 +6,60 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:45:45 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 20:48:40 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/15 05:13:11 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static char	*n0_set(char **str, t_sign **sign)
+{
+	char	*aux;
+	int		i;
+	char	*n0;
+
+	i = (*sign)->dot - ft_strlen(*str);
+	if (**str == '-')
+		i++;
+	if (i <= 0)
+		return (ft_strdup(""));
+	n0 = (char *) malloc(i + 1);
+	if (!n0)
+		return (NULL);
+	if (**str == '-')
+		aux = ft_strdup((*str) + 1);
+	else
+		aux = ft_strdup((*str));
+	if (!aux)
+		return (NULL);
+	free(*str);
+	*str = aux;
+	ft_memset((void *) n0, '0', i);
+	n0[i] = '\0';
+	return (n0);
+}
 
 static void	precision(char **str, t_sign **sign, int num)
 {
 	char	*n0;
 	char	*aux;
 
-	if (!(*sign)->dot)
+	if ((*sign)->dot == -1)
 		return ;
-	n0 = set_n0(str, sign);
+	if (!(*sign)->dot && !num)
+	{
+		free(*str);
+		*str = ft_strdup("");
+		return ;
+	}
+	n0 = n0_set(str, sign);
 	if (!n0)
 		return ;
 	aux = ft_strjoin(n0, *str);
 	if (!aux)
 		return ;
 	free(n0);
-	if (num < 0)
+	if (num < 0 && *aux != '-')
 	{
 		n0 = aux;
 		aux = ft_strjoin("-", aux);
@@ -69,3 +102,7 @@ char	*print_int(t_sign **sign, va_list ap)
 
 	return (str);
 }
+
+/* 	printf("dot: %d\n", (*sign)->dot);
+	printf("zero: %d\n", (*sign)->zero);
+	printf("fill: %d\n", (*sign)->fill); */

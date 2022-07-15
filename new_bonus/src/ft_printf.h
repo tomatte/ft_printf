@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/14 19:33:10 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/15 00:32:57 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ char	*print_hex(t_sign **sign, va_list ap, char type);
 char	*print_pointer(t_sign **sign, va_list ap);
 char	*print_uint(t_sign **sign, va_list ap);
 void	fill(char **str, t_sign **sign);
+void	fill_c(char **str, t_sign **sign);
 
 #endif

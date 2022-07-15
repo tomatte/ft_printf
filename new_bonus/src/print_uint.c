@@ -6,19 +6,25 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:57:10 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 20:48:57 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/15 02:12:58 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	precision(char **str, t_sign **sign)
+static void	precision(char **str, t_sign **sign, int unsigned num)
 {
 	char	*n0;
 	char	*aux;
 
-	if (!(*sign)->dot)
+	if ((*sign)->dot == -1)
 		return ;
+	if (!(*sign)->dot && !num)
+	{
+		free(*str);
+		*str = ft_strdup("");
+		return ;
+	}
 	n0 = set_n0(str, sign);
 	if (!n0)
 		return ;
@@ -40,6 +46,6 @@ char	*print_uint(t_sign **sign, va_list ap)
 	str = ft_uitoa(num);
 	if (!str)
 		return (NULL);
-	precision(&str, sign);
+	precision(&str, sign, num);
 	return (str);
 }

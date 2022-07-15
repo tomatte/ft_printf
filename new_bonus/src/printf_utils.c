@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/13 19:26:11 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/15 03:17:37 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_sign(t_sign **sign)
 {
 	(*sign)->minus = 0;
 	(*sign)->zero = 0;
-	(*sign)->dot = 0;
+	(*sign)->dot = -1;
 	(*sign)->ht = 0;
 	(*sign)->spc = 0;
 	(*sign)->plus = 0;
@@ -56,15 +56,13 @@ void	dot_case(const char *str, t_sign **sign, int c, int *index)
 	if (c != '.')
 		return ;
 	str++;
-	if ((!ft_isdigit(*str) && !ft_strchr("diuxX", *str)) || !*str)
+	if ((!ft_isdigit(*str) && !ft_strchr("diuxXs", *str)) || !*str)
 		(*sign)->is_valid = 0;
-	if (ft_strchr("diuxX", *str))
-		(*sign)->type = *str;
 	n = 0;
 	i = -1;
 	while (ft_isdigit(str[++i]))
 		n = (n * 10) + str[i] - 48;
-	if (!ft_strchr("diuxX", str[i]) || !*str)
+	if (!ft_strchr("diuxXs", str[i]) || !*str)
 	{
 		(*sign)->is_valid = 0;
 		return ;
@@ -76,7 +74,7 @@ void	dot_case(const char *str, t_sign **sign, int c, int *index)
 
 void	sign_place(t_sign **sign, int c)
 {
-	if (((*sign)->dot || (*sign)->zero) && (*sign)->is_valid)
+	if (((*sign)->dot >= 0 || (*sign)->zero) && (*sign)->is_valid)
 		return ;
 	if (ft_strchr(CONVERSION, c))
 	{
@@ -104,6 +102,8 @@ char	*set_n0(char **str, t_sign **sign)
 	i = (*sign)->dot - ft_strlen(*str);
 	if (**str == '-')
 		i--;
+	if (i <= 0)
+		return (NULL);
 	n0 = (char *) malloc(i + 1);
 	if (!n0)
 		return (NULL);

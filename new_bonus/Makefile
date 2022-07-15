@@ -18,7 +18,7 @@ NAME		=		libftprintf.a
 all: 		${NAME}
 
 compile_src: $(DIR_OBJ)
-	cc ${CFLAGS} -c ${SRC_PATH} -I.
+	cc -g3 ${CFLAGS} -c ${SRC_PATH} -I.
 
 $(LIBFT):
 	$(MAKE) -C ./src/libft bonus

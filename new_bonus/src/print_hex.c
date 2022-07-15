@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:42:18 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/12 20:46:17 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/15 02:12:07 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,19 @@ static void	actions(char **hex, t_sign **sign, char type)
 		ft_strtoupper(*hex);
 }
 
-static void	precision(char **str, t_sign **sign)
+static void	precision(char **str, t_sign **sign, unsigned int num)
 {
 	char	*n0;
 	char	*aux;
 
-	if (!(*sign)->dot)
+	if ((*sign)->dot == -1)
 		return ;
+	if (!(*sign)->dot && !num)
+	{
+		free(*str);
+		*str = ft_strdup("");
+		return ;
+	}
 	n0 = set_n0(str, sign);
 	if (!n0)
 		return ;
@@ -55,7 +61,7 @@ char	*print_hex(t_sign **sign, va_list ap, char type)
 	num = va_arg(ap, unsigned int);
 	hex = ft_itohex(num);
 	actions(&hex, sign, type);
-	precision(&hex, sign);
+	precision(&hex, sign, num);
 	
 	return (hex);
 }
