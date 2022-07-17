@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/15 00:32:57 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/17 05:24:14 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include "./libft/libft.h"
-
-#include <stdio.h>
 
 # define CONVERSION "cspdiuxX%"
 # define FORMAT "-0.# +"
@@ -51,5 +49,6 @@ char	*print_pointer(t_sign **sign, va_list ap);
 char	*print_uint(t_sign **sign, va_list ap);
 void	fill(char **str, t_sign **sign);
 void	fill_c(char **str, t_sign **sign);
+void	fill_zeros(char **str, t_sign **sign);
 
 #endif

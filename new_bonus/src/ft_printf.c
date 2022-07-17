@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/14 19:37:48 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/17 00:36:08 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	just_str(const char **str)
 {
 	int		i;
-	// char	*jst;
 
 	i = -1;
 	while ((*str)[++i] && (*str)[i] != '%')

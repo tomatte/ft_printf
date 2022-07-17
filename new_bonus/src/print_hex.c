@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:42:18 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/15 02:12:07 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/17 04:59:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	actions(char **hex, t_sign **sign, char type)
 {
 	char	*aux;
 
-	if ((*sign)->ht)
+	if ((*sign)->ht && **hex != '0')
 	{
 		aux = *hex;
 		*hex = ft_strjoin("0x", *hex);
@@ -62,6 +62,5 @@ char	*print_hex(t_sign **sign, va_list ap, char type)
 	hex = ft_itohex(num);
 	actions(&hex, sign, type);
 	precision(&hex, sign, num);
-	
 	return (hex);
 }

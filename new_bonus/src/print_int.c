@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:45:45 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/15 05:13:11 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/17 05:00:00 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,26 @@ static char	*n0_set(char **str, t_sign **sign)
 	return (n0);
 }
 
+static int	verify_dot(char **str, t_sign **sign, int num)
+{
+	if ((*sign)->dot == -1)
+		return (0);
+	if (!(*sign)->dot && !num)
+	{
+		free(*str);
+		*str = ft_strdup("");
+		return (0);
+	}
+	return (1);
+}
+
 static void	precision(char **str, t_sign **sign, int num)
 {
 	char	*n0;
 	char	*aux;
 
-	if ((*sign)->dot == -1)
+	if (!verify_dot(str, sign, num))
 		return ;
-	if (!(*sign)->dot && !num)
-	{
-		free(*str);
-		*str = ft_strdup("");
-		return ;
-	}
 	n0 = n0_set(str, sign);
 	if (!n0)
 		return ;
@@ -99,10 +106,5 @@ char	*print_int(t_sign **sign, va_list ap)
 		return (NULL);
 	precision(&str, sign, num);
 	plus_or_space(&str, num, sign);
-
 	return (str);
 }
-
-/* 	printf("dot: %d\n", (*sign)->dot);
-	printf("zero: %d\n", (*sign)->zero);
-	printf("fill: %d\n", (*sign)->fill); */

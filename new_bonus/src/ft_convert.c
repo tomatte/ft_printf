@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 05:15:03 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/15 04:46:26 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/17 05:07:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ char	*print_str(t_sign **sign, va_list ap)
 	return (aux);
 }
 
+static int	show_str(char *str)
+{
+	int	len;
+
+	if (str)
+	{
+		ft_putstr(str);
+		len = ft_strlen(str);
+		free(str);
+		return (len);
+	}
+	return (0);
+}
+
 void	ft_convert(t_sign **sign, va_list ap, int *len)
 {
 	char	*str;
@@ -83,12 +97,8 @@ void	ft_convert(t_sign **sign, va_list ap, int *len)
 		str = print_hex(sign, ap, (*sign)->type);
 	else if ((*sign)->type == '%')
 		str = ft_strdup("%");
+	fill_zeros(&str, sign);
 	fill(&str, sign);
 	init_sign(sign);
-	if (str)
-	{
-		ft_putstr(str);
-		*len += ft_strlen(str);
-		free(str);
-	}
+	*len += show_str(str);
 }

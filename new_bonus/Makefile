@@ -4,6 +4,7 @@ SRC			=		fill.c  ft_convert.c  \
 					ft_printf.c printf_utils.c  \
 					print_hex.c  print_int.c  \
 					print_pointer.c  print_uint.c \
+					fill_zeros.c
 
 SRC_PATH	=		$(patsubst %.c,$(DIR_SRC)/%.c,$(SRC))
 
