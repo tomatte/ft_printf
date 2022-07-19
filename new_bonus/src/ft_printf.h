@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 18:54:54 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/17 05:24:14 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/18 20:38:18 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define CONVERSION "cspdiuxX%"
 # define FORMAT "-0.# +"
 
-typedef struct	s_sign
+typedef struct s_sign
 {
 	int	minus;
 	int	zero;

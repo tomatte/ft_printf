@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/17 00:36:08 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/19 05:28:15 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ int	just_str(const char **str)
 	return (i);
 }
 
+static void	special_condition(const char **str, int i, t_sign **sign)
+{
+	if ((*sign)->plus && (*sign)->type == 'c' && (*str)[i] == 'c')
+		(*sign)->is_valid = 0;
+	if (!ft_strchr("cs%p", (*sign)->type) && (*sign)->zero > (*sign)->dot
+		&& (*sign)->dot && (*sign)->fill < (*sign)->zero && (*sign)->dot != -1)
+	{
+		(*sign)->fill = (*sign)->zero;
+		(*sign)->zero = 0;
+	}
+}
+
 static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 {
 	int	c;
@@ -30,8 +42,8 @@ static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 
 	if (!**str)
 		return ;
-	i = 0;
-	while ((*str)[i])
+	i = -1;
+	while ((*str)[++i])
 	{
 		c = (*str)[i + 1];
 		is_digit_alone(&(*str)[i + 1], sign, &i, &c);
@@ -39,8 +51,8 @@ static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 		sign_place(sign, c);
 		if (!(*sign)->is_valid || (*sign)->type || !c)
 			break ;
-		i++;
 	}
+	special_condition(str, i, sign);
 	if (!(*sign)->is_valid || !c)
 	{
 		ft_putchar('%');
@@ -54,9 +66,11 @@ static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 
 static int	string_mount(const char **str, va_list ap, t_sign **sign)
 {
-	int	len;
+	int			len;
+	const char	*begin;
 
 	len = 0;
+	begin = *str;
 	while (**str)
 	{
 		len += just_str(str);

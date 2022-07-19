@@ -6,17 +6,17 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:42:18 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/17 04:59:39 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/18 22:24:55 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	actions(char **hex, t_sign **sign, char type)
+static void	actions(char **hex, t_sign **sign, char type, long unsigned num)
 {
 	char	*aux;
 
-	if ((*sign)->ht && **hex != '0')
+	if ((*sign)->ht && num)
 	{
 		aux = *hex;
 		*hex = ft_strjoin("0x", *hex);
@@ -60,7 +60,7 @@ char	*print_hex(t_sign **sign, va_list ap, char type)
 
 	num = va_arg(ap, unsigned int);
 	hex = ft_itohex(num);
-	actions(&hex, sign, type);
 	precision(&hex, sign, num);
+	actions(&hex, sign, type, num);
 	return (hex);
 }

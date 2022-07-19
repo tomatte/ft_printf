@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 05:15:03 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/17 05:07:39 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/18 20:57:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	print_char(va_list ap, int *len, t_sign **sign)
 	char	*str;
 
 	str = NULL;
+	if ((*sign)->zero > (*sign)->fill)
+		(*sign)->fill = (*sign)->zero;
 	fill_c(&str, sign);
 	c = va_arg(ap, int);
 	if (str && !(*sign)->minus)

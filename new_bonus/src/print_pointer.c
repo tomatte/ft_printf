@@ -6,11 +6,47 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 17:46:07 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/11 18:31:05 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/18 22:13:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void	precision(char **str, t_sign **sign, long unsigned int num)
+{
+	char	*n0;
+	char	*aux;
+
+	if ((*sign)->dot == -1)
+		return ;
+	if (!(*sign)->dot && !num)
+	{
+		free(*str);
+		*str = ft_strdup("");
+		return ;
+	}
+	n0 = set_n0(str, sign);
+	if (!n0)
+		return ;
+	aux = ft_strjoin(n0, *str);
+	if (!aux)
+		return ;
+	free(n0);
+	if (*str)
+		free(*str);
+	*str = aux;
+}
+
+static char	*number_tohex(long unsigned int number, t_sign **sign)
+{
+	char	*ptr;
+
+	ptr = ft_itohex(number);
+	if (!ptr)
+		return (NULL);
+	precision(&ptr, sign, number);
+	return (ptr);
+}
 
 char	*print_pointer(t_sign **sign, va_list ap)
 {
@@ -21,7 +57,7 @@ char	*print_pointer(t_sign **sign, va_list ap)
 	address = va_arg(ap, long unsigned);
 	if (!address)
 		return (ft_strdup("(nil)"));
-	ptr = ft_itohex(address);
+	ptr = number_tohex(address, sign);
 	aux = ptr;
 	ptr = ft_strjoin("0x", ptr);
 	if (!ptr)

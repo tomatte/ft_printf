@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 19:59:59 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/17 04:59:24 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/19 05:30:04 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	is_digit_alone(const char *str, t_sign **sign, int *index, int *c)
 	i = -1;
 	while (ft_isdigit(str[++i]))
 		n = (n * 10) + str[i] - 48;
-	if (str[i] != '.' && !ft_strchr(CONVERSION, str[i]))
+	if (!ft_strchr(".+", str[i]) && !ft_strchr(CONVERSION, str[i]))
 		(*sign)->is_valid = 0;
-	else if (*str == '0')
+	if (*str == '0')
 		(*sign)->zero = n;
 	else
 		(*sign)->fill = n;
+	if (*str == '0' && n == 0 && ft_strchr("-#", str[i]))
+		(*sign)->is_valid = 1;
 	(*index) += i;
 	*c = str[i];
 	if (ft_strchr(CONVERSION, str[i]) && str[i])
@@ -56,13 +58,13 @@ void	dot_case(const char *str, t_sign **sign, int c, int *index)
 	if (c != '.')
 		return ;
 	str++;
-	if ((!ft_isdigit(*str) && !ft_strchr("diuxXs", *str)) || !*str)
+	if ((!ft_isdigit(*str) && !ft_strchr("diuxXscp", *str)) || !*str)
 		(*sign)->is_valid = 0;
 	n = 0;
 	i = -1;
 	while (ft_isdigit(str[++i]))
 		n = (n * 10) + str[i] - 48;
-	if (!ft_strchr("diuxXs", str[i]) || !*str)
+	if (!ft_strchr("diuxXscp", str[i]) || !*str)
 	{
 		(*sign)->is_valid = 0;
 		return ;

@@ -29,15 +29,6 @@ static void	verifications(t_sign **sign)
 	}
 }
 
-static void	special_space(char **str, t_sign **sign)
-{
-	if (!**str && (*sign)->zero)
-	{
-		(*sign)->fill = (*sign)->zero;
-		(*sign)->zero = 0;
-	}
-}
-
 static char	*fill_zero_aux(char **str, t_sign **sign)
 {
 	char	*fill;
@@ -74,7 +65,6 @@ void	fill_zeros(char **str, t_sign **sign)
 	if ((!(*sign)->fill && !(*sign)->zero) || !*str)
 		return ;
 	verifications(sign);
-	special_space(str, sign);
 	if ((*sign)->zero > (int) ft_strlen(*str))
 	{
 		fill = fill_zero_aux(str, sign);
