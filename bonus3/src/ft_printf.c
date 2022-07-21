@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:04:50 by dbrandao          #+#    #+#             */
-/*   Updated: 2022/07/19 05:28:15 by dbrandao         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:42:20 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ static void	special_condition(const char **str, int i, t_sign **sign)
 		&& (*sign)->dot && (*sign)->fill < (*sign)->zero && (*sign)->dot != -1)
 	{
 		(*sign)->fill = (*sign)->zero;
+		(*sign)->zero = 0;
+	}
+	if ((*sign)->zero)
+	{
+		if ((*sign)->zero > (*sign)->fill)
+			(*sign)->fill = (*sign)->zero;
 		(*sign)->zero = 0;
 	}
 }
@@ -67,10 +73,8 @@ static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 static int	string_mount(const char **str, va_list ap, t_sign **sign)
 {
 	int			len;
-	const char	*begin;
 
 	len = 0;
-	begin = *str;
 	while (**str)
 	{
 		len += just_str(str);
