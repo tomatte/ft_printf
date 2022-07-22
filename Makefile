@@ -41,3 +41,5 @@ fclean:		clean
 	$(MAKE) -C ./src/libft fclean
 
 re: 		fclean all
+
+.PHONY: all clean fclean re
