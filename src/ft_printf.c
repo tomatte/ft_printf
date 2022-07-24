@@ -67,10 +67,8 @@ static void	verify_specifiers(const char **str, t_sign **sign, int *len)
 static int	string_mount(const char **str, va_list ap, t_sign **sign)
 {
 	int			len;
-	const char	*begin;
 
 	len = 0;
-	begin = *str;
 	while (**str)
 	{
 		len += just_str(str);
