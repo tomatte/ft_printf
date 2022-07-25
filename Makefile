@@ -6,40 +6,37 @@ SRC			=		fill.c  ft_convert.c  \
 					print_pointer.c  print_uint.c \
 					fill_zeros.c
 
-SRC_PATH	=		$(patsubst %.c,$(DIR_SRC)/%.c,$(SRC))
+SRC_PRNT	=		$(patsubst %.c,$(DIR_SRC)/%.c,$(SRC))
 
-CFLAGS		=		-Wall -Wextra -Werror
+H_SRC	=	./src/ft_printf.h
 
-OBJ			=		$(SRC:.c=.o)
+OBJS	=	${SRC_LIB:.c=.o} ${SRC_PRNT:.c=.o}
 
-LIBFT		=		libft.a
+NAME	=	libftprintf.a
 
-NAME		=		libftprintf.a
+FLAGS	=	-Wall -Wextra -Werror
+
+RM		=	rm -f
+
+.c.o:
+			cc ${FLAGS} -c $< -o ${<:.c=.o} -I.
+
+$(NAME):	${OBJS} ${H_SRC}
+			make -C ./src/libft
+			mv ./src/libft/libft.a ./$(NAME)
+			ar -rcs $@ $^
 
 all: 		${NAME}
 
-compile_src: $(DIR_OBJ)
-	cc -g3 ${CFLAGS} -c ${SRC_PATH} -I.
-
-$(LIBFT):
-	$(MAKE) -C ./src/libft bonus
-
-move:
-	mv ./src/libft/${LIBFT} ./${NAME}
-
-$(NAME):	compile_src ${LIBFT} move
-	ar -rcs $@ $(OBJ)
-
-bonus: all
+bonus:		${NAME}
 
 clean:
-	rm -f ${OBJ}; \
-	$(MAKE) -C ./src/libft clean
+			${RM} ${OBJS}
+			make clean -C ./src/libft
 
 fclean:		clean
-	rm -rf $(NAME); \
-	$(MAKE) -C ./src/libft fclean
+			${RM} ${NAME}
 
-re: 		fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		all clean fclean re
